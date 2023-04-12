@@ -13,15 +13,21 @@ ${YELLOW}██████╗ ██╗   ██╗██████╗  █�
 ██████╔╝   ██║   ██║     ██║  ██║███████║███████║███████╗██║  ██║
 ╚═════╝    ╚═╝   ╚═╝     ╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝╚═╝  ╚═╝${NC}
                                             ${GREEN}FB/sharifansari00${NC}
-./bypasser.sh https://example.com path
+Example: ./bypasser.sh https://example.com path
 """
 
 check_url() {
-  status=`curl -k -s -o /dev/null -w "%{http_code}" "$@"`
-  if [ "$status" -eq 200 ]; then
-    echo -e "${GREEN}$status  --> $@${NC}"
+  status1=`curl -k -s -o /dev/null -iL -w "%{http_code}" "$@"`
+  status2=`curl -k -s -o /dev/null -i -w "%{http_code}" "$@"`
+  if [ "$status1" -eq 200 ]; then
+    echo -e "${GREEN}$status1  --> $@${NC}${YELLOW}   --->   Redirect${NC}"
   else
-    echo -e "${RED}$status  --> $@${NC}"
+    echo -e "${RED}$status1  --> $@${NC}${YELLOW}   --->   Redirect${NC}"
+  fi
+  if [ "$status2" -eq 200 ]; then
+    echo -e "${GREEN}$status2  --> $@${NC}   --->   No Redirect"
+  else
+    echo -e "${RED}$status2  --> $@${NC}   --->   No Redirect"
   fi
 }
 
