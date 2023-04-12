@@ -1,5 +1,5 @@
 # bypasser
 ### Usage:
 ```
-bash bypasser.sh example.com path
+bash bypasser.sh https://example.com path
 ```
